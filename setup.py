@@ -3,8 +3,20 @@
 """
 setup.py for wave_utils
 """
-
+import sys
 from setuptools import setup
+from setuptools.command.test import test as TestCommand
+## to make "setup.py test" work
+
+class PyTest(TestCommand):
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.verbose = True
+
+    def run_tests(self):
+        import pytest
+        errno = pytest.main(self.test_args)
+        sys.exit(errno)
 
 setup(
     name="wave_utils",
@@ -17,8 +29,8 @@ setup(
     license="Public Domain",
     # keywords = "",
     packages=["wave_utils"],
-#    tests_require=['pytest'],
-#    cmdclass=dict(test=PyTest),
+    tests_require=['pytest'],
+    cmdclass=dict(test=PyTest),
     classifiers=[
         "Development Status :: 2 - Pre-Alpha",
         "License :: Public Domain",
