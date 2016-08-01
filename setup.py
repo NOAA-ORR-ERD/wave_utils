@@ -6,8 +6,9 @@ setup.py for wave_utils
 import sys
 from setuptools import setup
 from setuptools.command.test import test as TestCommand
-## to make "setup.py test" work
 
+
+# to make "setup.py test" work
 class PyTest(TestCommand):
     def finalize_options(self):
         TestCommand.finalize_options(self)
@@ -18,14 +19,26 @@ class PyTest(TestCommand):
         errno = pytest.main(self.test_args)
         sys.exit(errno)
 
+
+def get_version():
+    """
+    return the version number from the __init__
+    """
+    for line in open("wave_utils/__init__.py"):
+        if line.startswith("__version__"):
+            version = line.strip().split('=')[1].strip()
+            return version
+    raise ValueError("can't find version string in __init__")
+
+
 setup(
     name="wave_utils",
-    version='0.1.0',
+    version=get_version(),
     description="Utilities for computing properties of ocean waves",
     long_description=open('README.md').read(),
     author="Chris Barker",
     author_email="chris.barker@noaa.gov",
-    url="https://github.com/ChrisBarker-NOAA",
+    url="https://github.com/ChrisBarker-NOAA/wave_utils",
     license="Public Domain",
     # keywords = "",
     packages=["wave_utils"],
@@ -41,4 +54,3 @@ setup(
         "Topic :: Scientific/Engineering",
     ],
 )
-

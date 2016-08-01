@@ -86,7 +86,7 @@ def group_speed(k, h, g):
 def shoaling_coeff(omega, g, h0, h2):
     """
 
-    Compute the shoaling coeff for two depths: ho and h1.
+    Compute the shoaling coeff for two depths: ho and h2.
 
     Pass in h0 = None for deep water
 
@@ -95,13 +95,9 @@ def shoaling_coeff(omega, g, h0, h2):
     Cg2 = group_speed(k2, h2, g)
     if h0 is not None:
         k0 = wave_number(g, omega, h0)
-
         Cg0 = group_speed(k0, h0, g)
-
         Ks = np.sqrt(Cg0 / Cg2)
-
         return Ks
-
     else:  # Deep water
         return np.sqrt((g / (2 * omega)) / Cg2)
 
