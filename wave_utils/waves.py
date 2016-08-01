@@ -9,7 +9,7 @@ linear wave theory calculations.
 # py2/3 compatible:
 from __future__ import absolute_import, division, print_function, unicode_literals
 
-import  numpy as np
+import numpy as np
 
 
 def wave_number(g, omega, h):
@@ -20,13 +20,15 @@ def wave_number(g, omega, h):
 
     return k
 
+
 def frequency(g, k, h):
 
-    omega = np.sqrt( g*k*np.tanh(k*h) )
+    omega = np.sqrt(g * k * np.tanh(k * h))
 
     return omega
 
-def dispersion(p, Tol = 1e-14, MaxIter = 100):
+
+def dispersion(p, Tol=1e-14, MaxIter=100):
     """
 
     finds q, given p
@@ -35,47 +37,51 @@ def dispersion(p, Tol = 1e-14, MaxIter = 100):
     p = omega^2 h / g   non-d water depth
 
     """
-    #First guess (from Fenton and McKee):
-    q = np.tanh( p**0.75 )** (-2.0/3.0)
+    # First guess (from Fenton and McKee):
+    q = np.tanh(p ** 0.75) ** (-2.0 / 3.0)
 
     iter = 0
-    f = q * np.tanh(q*p) - 1
+    f = q * np.tanh(q * p) - 1
     while abs(f) > Tol:
-        qp = q*p
-        fp = qp / ( np.cosh(qp)**2 ) + np.tanh(qp) 
-        q = q - f/fp
-        f = q * np.tanh(q*p) - 1
+        qp = q * p
+        fp = qp / (np.cosh(qp) ** 2) + np.tanh(qp)
+        q = q - f / fp
+        f = q * np.tanh(q * p) - 1
         iter += 1
         if iter > MaxIter:
             raise Exception("Maximum number of iterations reached in dispersion()")
     return q
 
+
 def max_u(a, omega, g, h, z):
 
     k = wave_number(g, omega, h)
-    u = a * omega * ( np.cosh( k*(h+z) ) / np.sinh( k*h ) )
+    u = a * omega * (np.cosh(k * (h + z)) / np.sinh(k * h))
 
     return u
+
 
 def amp_scale_at_depth(g, omega, h, z):
 
     k = wave_number(g, omega, h)
 
-    return   np.cosh(k*(h+z))  /  np.cosh(k*(h))
+    return np.cosh(k * (h + z)) / np.cosh(k * (h))
 
-    
+
 def celerity(k, h, g):
 
-    C = np.sqrt( g/k * np.tanh(k*h) )
-    
+    C = np.sqrt(g / k * np.tanh(k * h))
+
     return C
+
 
 def group_speed(k, h, g):
 
-    n = 1.0/2 * (1 + ( 2*k*h / np.sinh(2*k*h) ) )
+    n = 1.0 / 2 * (1 + (2 * k * h / np.sinh(2 * k * h)))
     Cg = n * celerity(k, h, g)
 
     return Cg
+
 
 def shoaling_coeff(omega, g, h0, h2):
     """
@@ -85,46 +91,44 @@ def shoaling_coeff(omega, g, h0, h2):
     Pass in h0 = None for deep water
 
     """
-    
-
-    k2  =  wave_number(g,omega,h2)
+    k2 = wave_number(g, omega, h2)
     Cg2 = group_speed(k2, h2, g)
     if h0 is not None:
-        k0 =  wave_number(g,omega,h0)
+        k0 = wave_number(g, omega, h0)
 
         Cg0 = group_speed(k0, h0, g)
 
-        Ks = np.sqrt(Cg0/Cg2)
+        Ks = np.sqrt(Cg0 / Cg2)
 
         return Ks
-    else: #Deep water
-        return np.sqrt((g / (2*omega)) / Cg2)
+
+    else:  # Deep water
+        return np.sqrt((g / (2 * omega)) / Cg2)
 
 
+# if __name__ == "__main__":
 
-if __name__ == "__main__":
+#    import pylab
 
-    import pylab
+#    print "Computing velocity at the bottom"
+#    print "Please use all SI units"
 
-##    print "Computing velocity at the bottom"
-##    print "Please use all SI units"
+#    g = 9.806
 
-##    g = 9.806
+#    H = input("Wave height? =>")
+#    h = input("Depth ? =>")
+#    T = input("Period? =>")
 
-##    H = input("Wave height? =>")
-##    h = input("Depth ? =>")
-##    T = input("Period? =>")
+#    a = H/2
+#    omega = 2*np.pi/T
+#    z = -h
 
-##    a = H/2
-##    omega = 2*np.pi/T
-##    z = -h
-    
-##    k = wave_number(g,omega,h)
-##    MaxU = max_u(a,omega,g,k,h,z)
+#    k = wave_number(g,omega,h)
+#    MaxU = max_u(a,omega,g,k,h,z)
 
-##    print "the maximum velocity at the bottom is: %f m/s", MaxU
-##    print "Computing velocity at the bottom"
-##    print "Please use all SI units"
+#    print "the maximum velocity at the bottom is: %f m/s", MaxU
+#    print "Computing velocity at the bottom"
+#    print "Please use all SI units"
 
 
 #     g = 9.806
