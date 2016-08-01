@@ -153,6 +153,9 @@ def shoaling_coeff(omega, g, h0, h2):
 
     Compute the shoaling coeff for two depths: ho and h2.
 
+    The shoaling coeff is the ratio of wave height (H2) at a particular
+    point of interest to the original or deep water wave height (H0).
+
     Pass in h0 = None for deep water
 
     :param omega: -- the wave frequency
