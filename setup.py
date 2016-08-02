@@ -26,7 +26,7 @@ def get_version():
     """
     for line in open("wave_utils/__init__.py"):
         if line.startswith("__version__"):
-            version = line.strip().split('=')[1].strip()
+            version = line.strip().split('=')[1].strip().strip("'").strip('"')
             return version
     raise ValueError("can't find version string in __init__")
 
@@ -35,17 +35,18 @@ setup(
     name="wave_utils",
     version=get_version(),
     description="Utilities for computing properties of ocean waves",
-    long_description=open('README.md').read(),
+    long_description=open('README.rst').read(),
     author="Chris Barker",
     author_email="chris.barker@noaa.gov",
     url="https://github.com/ChrisBarker-NOAA/wave_utils",
+    download_url="https://github.com/ChrisBarker-NOAA/wave_utils/archive/v0.1.1.tar.gz",
     license="Public Domain",
     # keywords = "",
     packages=["wave_utils"],
     tests_require=['pytest'],
     cmdclass=dict(test=PyTest),
     classifiers=[
-        "Development Status :: 2 - Pre-Alpha",
+        "Development Status :: 4 - Beta",
         "License :: Public Domain",
         "Intended Audience :: Science/Research",
         "Operating System :: OS Independent",
