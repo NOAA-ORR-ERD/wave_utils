@@ -2,6 +2,7 @@ language: python
 
 env:
     - CONDA="python=2.7"
+    - CONDA="python=3.4"
     - CONDA="python=3.5"
 
 before_install:
@@ -13,5 +14,4 @@ before_install:
     - source activate TEST
 
 script:
-    - python setup.py install
     - python setup.py test
