@@ -1,4 +1,6 @@
-# wave_utils
+##########
+wave_utils
+##########
 
 Python utilities for computing properties of ocean waves.
 
@@ -16,5 +18,9 @@ eulerian velocities
 
 ...
 
+| Created by:
+| Christoher H. Barker
+| Chris.Barker@noaa.gov
 
+I'd appreciate anyone letting me know if they find this work useful.
 
