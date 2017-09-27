@@ -45,9 +45,7 @@ def frequency(g, k, h):
     :returns omega: -- wave frequency
     """
 
-    omega = np.sqrt(g * k * np.tanh(k * h))
-
-    return omega
+    return np.sqrt(g * k * np.tanh(k * h))
 
 
 def dispersion(p, tol=1e-14, max_iter=100):
