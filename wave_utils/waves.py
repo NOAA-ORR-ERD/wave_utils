@@ -39,7 +39,7 @@ def frequency(g, k, h):
     (linear dispersion relationship)
 
     :param k: the wave number
-    :param g: -- gravitational acceleration (defaults to 9.806 m/s^2)
+    :param g: -- gravitational acceleration
     :param h: -- the water depth
 
     :returns omega: -- wave frequency
