@@ -16,7 +16,7 @@ g = 9.806  # gravitational acceleration in m^2/s
 
 def wave_number(g, omega, h):
     """
-    computes the wave number for given frequency and water depth
+    Computes the wave number for given frequency and water depth
     (linear dispersion relationship)
 
     :param omega: -- wave frequency
@@ -35,7 +35,7 @@ def wave_number(g, omega, h):
 
 def frequency(g, k, h):
     """
-    computes the frequency for a given wave number and water depth
+    Computes the frequency for a given wave number and water depth
     (linear dispersion relationship)
 
     :param k: the wave number
@@ -106,7 +106,7 @@ def max_u(a, omega, g, h, z=None):
 
 def amp_scale_at_depth(g, omega, h, z):
     """
-    compute the scale factor of the orbital amplitude at the given depth
+    Compute the scale factor of the orbital amplitude at the given depth
 
     :param g: -- gravitational acceleration
     :param omega: -- the wave frequency
@@ -121,7 +121,7 @@ def amp_scale_at_depth(g, omega, h, z):
 
 def celerity(k, h, g=g):
     """
-    compute the celerity (wave speed, phase speed) for a given wave number and depth
+    Compute the celerity (wave speed, phase speed) for a given wave number and depth
 
     :param k: -- the wave number
     :param h: -- the water depth
@@ -135,7 +135,7 @@ def celerity(k, h, g=g):
 
 def group_speed(k, h, g=g):
     """
-    compute the group speed for a given wave number and depth
+    Compute the group speed for a given wave number and depth
 
     :param k: -- the wave number
     :param h: -- the water depth
@@ -150,7 +150,6 @@ def group_speed(k, h, g=g):
 
 def shoaling_coeff(omega, g, h0, h2):
     """
-
     Compute the shoaling coeff for two depths: ho and h2.
 
     The shoaling coeff is the ratio of wave height (H2) at a particular
