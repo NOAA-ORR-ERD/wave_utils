@@ -8,6 +8,7 @@ some simple tests --  not at all complete
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
+import pytest
 
 from wave_utils import waves
 
@@ -15,6 +16,19 @@ from wave_utils import waves
 def test_import():
     """ is there anything there? """
     assert hasattr(waves, 'wave_number')
+
+def test_frequency():
+    """
+    Test the wave frequency
+
+    The test is done for multiple values and most importantly edge cases, due to
+    the sqrt in the equation.
+    """
+    assert abs(4.59043034 - waves.frequency(waves.g, 3.0, 0.3)) < 1e-7
+    assert abs(0.0 - waves.frequency(waves.g, 0.0, 0.3)) < 1e-7
+    assert abs(4.59043034 - waves.frequency(waves.g, -3.0, 0.3)) < 1e-7
+
+    assert np.isnan(waves.frequency(waves.g, -3.0, 0.3)) == 0
 
 def test_celerity_deep():
     h = 10000 # very deep
