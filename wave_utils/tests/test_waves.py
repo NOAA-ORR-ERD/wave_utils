@@ -30,6 +30,12 @@ def test_frequency():
 
     assert np.isnan(waves.frequency(waves.g, -3.0, 0.3)) == 0
 
+def test_dispersion():
+    assert abs(1.199678640 - waves.dispersion(1.0)) < 1e-7
+    with pytest.raises(ValueError):
+        waves.dispersion(0.0)
+
+
 def test_celerity_deep():
     h = 10000 # very deep
     omega = 2*np.pi/1 # short period wave

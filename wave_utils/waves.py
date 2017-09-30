@@ -57,8 +57,8 @@ def dispersion(p, tol=1e-14, max_iter=100):
     q = gk/omega^2     non-d wave number
     p = omega^2 h / g   non-d water depth
 
-    Starts with the Fenton and McKee approximation, then iterates with
-    Newton's method until accurate to within tol.
+    Starts with the Fenton and McKee approximation, then iterates with Newton's
+    method until accurate to within tol.
 
     :param p: non-dimensional water depth
     :param tol=1e-14: acceptable tolerance
@@ -66,7 +66,8 @@ def dispersion(p, tol=1e-14, max_iter=100):
                      (it SHOULD converge in well less than 100)
 
     """
-
+    if p == 0.0:
+        raise ValueError("Non dimensional water depth d must be >= 0.0")
     # First guess (from Fenton and McKee):
     q = np.tanh(p ** 0.75) ** (-2.0 / 3.0)
 
