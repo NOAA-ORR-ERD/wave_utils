@@ -31,6 +31,9 @@ def test_frequency():
     assert np.isnan(waves.frequency(waves.g, -3.0, 0.3)) == 0
 
 def test_dispersion():
+    """
+    Test if wave dispersion is invalid for a water depth d >= 0
+    """
     assert abs(1.199678640 - waves.dispersion(1.0)) < 1e-7
     with pytest.raises(ValueError):
         waves.dispersion(0.0)
