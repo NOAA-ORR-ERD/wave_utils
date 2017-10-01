@@ -37,6 +37,8 @@ def test_dispersion():
     assert abs(1.199678640 - waves.dispersion(1.0)) < 1e-7
     with pytest.raises(ValueError):
         waves.dispersion(0.0)
+    with pytest.raises(ValueError):
+        waves.dispersion(-1.0)
 
 
 def test_celerity_deep():
