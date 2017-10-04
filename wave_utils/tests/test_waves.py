@@ -24,21 +24,16 @@ def test_frequency():
     The test is done for multiple values and most importantly edge cases, due to
     the sqrt in the equation.
     """
-    assert abs(4.59043034 - waves.frequency(waves.g, 3.0, 0.3)) < 1e-7
-    assert abs(0.0 - waves.frequency(waves.g, 0.0, 0.3)) < 1e-7
-    assert abs(4.59043034 - waves.frequency(waves.g, -3.0, 0.3)) < 1e-7
+    assert np.isclose(4.59043034, waves.frequency(waves.g, 3.0, 0.3), atol=1e-7)
+    assert np.isclose(0.0, waves.frequency(waves.g, 0.0, 0.3), atol=1e-7)
+    assert np.isclose(4.59043034, waves.frequency(waves.g, -3.0, 0.3), atol=1e-7)
 
     assert np.isnan(waves.frequency(waves.g, -3.0, 0.3)) == 0
 
 def test_dispersion():
-    """
-    Test if wave dispersion is invalid for a water depth d >= 0
-    """
-    assert abs(1.199678640 - waves.dispersion(1.0)) < 1e-7
+    assert np.isclose(1.199678640, waves.dispersion(1.0), atol=1e-7)
     with pytest.raises(ValueError):
         waves.dispersion(0.0)
-    with pytest.raises(ValueError):
-        waves.dispersion(-1.0)
 
 
 def test_celerity_deep():
