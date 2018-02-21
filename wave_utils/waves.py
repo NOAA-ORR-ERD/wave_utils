@@ -3,15 +3,19 @@
 """
 
 The waves.py module contains an assortment of tools for working with
-linear wave theory calculations.
+linear wave theory.
 
 """
+
 # py2/3 compatible:
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import numpy as np
 
-g = 9.806  # gravitational acceleration in m^2/s
+# from: https://en.wikipedia.org/wiki/Standard_gravity
+# this many digits is silly, but why not?
+g = 9.80665  # gravitational acceleration in m^2/s
+# g = 9.806
 
 
 def wave_number(g, omega, h):
@@ -19,11 +23,14 @@ def wave_number(g, omega, h):
     Computes the wave number for given frequency and water depth
     (linear dispersion relationship)
 
+    :param g: -- gravitational acceleration
     :param omega: -- wave frequency
-    :param g: -- gravitational acceleration (defaults to 9.806 m/s^2)
     :param h: -- the water depth
 
-    :returns k: the wave number
+    :returns k: the wave number - units of 1/length
+
+    NOTE: units of the parameters should be consistent,
+          and units of  k will match units of the inputs.
     """
 
     p = omega**2 * h / g
@@ -124,7 +131,8 @@ def celerity(k, h, g=g):
 
     :param k: -- the wave number
     :param h: -- the water depth
-    :param g=g: -- gravitational acceleration (defaults to 9.806 m/s^2)
+    :param g=g: -- gravitational acceleration
+                defaults to "standard gravity" in SI units (m/s^2)
     """
 
     C = np.sqrt(g / k * np.tanh(k * h))
