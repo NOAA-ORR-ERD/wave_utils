@@ -19,7 +19,7 @@ eulerian velocities
 ...
 
 | Created by:
-| Christoher H. Barker
+| Christopher H. Barker
 | Chris.Barker@noaa.gov
 
 I'd appreciate anyone letting me know if they find this work useful.
