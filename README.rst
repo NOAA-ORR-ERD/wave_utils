@@ -12,15 +12,16 @@ group speed
 
 celerity
 
-shoaling coeff
+shoaling coefficient
 
-eulerian velocities
+Eulerian velocities
 
-...
+-----------
 
 | Created by:
 | Christopher H. Barker
-| Chris.Barker@noaa.gov
+| ``Chris.Barker@noaa.gov``
+
 
 I'd appreciate anyone letting me know if they find this work useful.
 
