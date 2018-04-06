@@ -25,3 +25,6 @@ Eulerian velocities
 
 I'd appreciate anyone letting me know if they find this work useful.
 
+NOTE: for workign with wave spectra, this may be useful:
+https://github.com/metocean/wavespectra
+
