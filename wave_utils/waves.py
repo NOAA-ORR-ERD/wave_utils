@@ -12,6 +12,8 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import numpy as np
 
+tau = 2 * np.pi # tau is often used as a name for 2*pi
+
 # from: https://en.wikipedia.org/wiki/Standard_gravity
 # this many digits is silly, but why not?
 g = 9.80665  # gravitational acceleration in m^2/s
@@ -38,6 +40,41 @@ def wave_number(g, omega, h):
     k = q * omega**2 / g
 
     return k
+
+
+def wave_length(T, h, g=9.80665):
+    """
+    wave length at a given depth and period
+
+    utility function if you don't like to deal with pi ...
+
+    :param T: the wave period
+    :param h: water depth
+    :param g=9.80665: gravitational acceleration -- specify if you want other
+                      than SI units)
+
+    """
+    omega = tau / T
+    k = tau / wave_number(g, omega, h)
+    return k
+
+
+def period(L, h, g=9.80665):
+    """
+    period at a given depth and wavelegth
+
+    utility function if you don't like to deal with pi ...
+
+    :param L: the wave length
+    :param h: water depth
+    :param g=9.80665: gravitational acceleration -- specify if you want other
+                      than SI units)
+
+    """
+    k = tau / L
+    T = tau / frequency(g, k, h)
+    return T
+
 
 
 def frequency(g, k, h):
@@ -103,7 +140,7 @@ def max_u(a, omega, g, h, z=None):
                    if None, then h is used (the bottom)
     """
 
-    z = h if z is None else z
+    z = -h if z is None else z
     k = wave_number(g, omega, h)
     u = a * omega * (np.cosh(k * (h + z)) / np.sinh(k * h))
 
